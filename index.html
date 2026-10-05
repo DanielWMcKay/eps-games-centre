@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EPS Games Centre</title>
+<meta name="theme-color" content="#063b35">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+</head>
+<body>
+<div class="grain"></div>
+<main class="shell">
+
+<header class="brand panel">
+  <img src="./assets/emsworth-logo.png" alt="Emsworth Primary School" class="brand-logo">
+  <div>
+    <div class="eyebrow">Emsworth Primary School</div>
+    <h1>Games Centre</h1>
+    <p>One app. Seasonal games. Questionable staff alliances.</p>
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" data-view="hub">Home</button>
+  <button class="nav-btn" data-view="play">My Game</button>
+  <button class="nav-btn" data-view="feed">Live Feed</button>
+  <button class="nav-btn" data-view="admin">Game Master</button>
+</nav>
+
+<section id="hub" class="view active">
+  <div class="hero panel">
+    <div class="eyebrow">Current game</div>
+    <h2 id="activeTitle">Loading…</h2>
+    <p id="activeSubtitle" class="muted"></p>
+    <div class="metrics">
+      <div><span>Players remaining</span><strong id="activeCount">—</strong></div>
+      <div><span>Status</span><strong id="roundStatus">—</strong></div>
+    </div>
+    <div class="actions">
+      <button id="installBtn" class="btn ghost">Install Games Centre</button>
+      <button id="alertsBtn" class="btn">Enable alerts</button>
+    </div>
+    <div id="installHelp" class="notice hidden"></div>
+  </div>
+
+  <div class="games-grid">
+    <article class="game-card christmas">
+      <div class="season">Christmas</div>
+      <h3>Christmas Cluedo</h3>
+      <p>Targets. Objects. Locations. Elegant festive betrayal.</p>
+      <button class="btn ghost gameOpen" data-game="christmas">View game</button>
+    </article>
+
+    <article class="game-card curse">
+      <div class="season">Halloween</div>
+      <h3>The Curse</h3>
+      <p>Marks. Charms. Places of Power. Spread the spell.</p>
+      <button class="btn ghost gameOpen" data-game="curse">View game</button>
+    </article>
+
+    <article class="game-card easter">
+      <div class="season">Easter</div>
+      <h3>Golden Egg Hunt</h3>
+      <p>A future spring challenge for the Games Centre.</p>
+      <button class="btn ghost" disabled>Coming soon</button>
+    </article>
+  </div>
+</section>
+
+<section id="play" class="view">
+  <div class="two-col">
+    <div class="panel">
+      <div class="section-kicker">Join</div>
+      <h2>Sign up</h2>
+      <p class="muted">Choose a private four-digit PIN.</p>
+      <label>Name<input id="signupName" placeholder="Your name"></label>
+      <label>PIN<input id="signupPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
+      <button id="signupBtn" class="btn full">Sign up</button>
+      <div id="signupStatus" class="status"></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-kicker">Private access</div>
+      <h2>Open my assignment</h2>
+      <label>Name<input id="loginName" placeholder="Your name"></label>
+      <label>PIN<input id="loginPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
+      <button id="loginBtn" class="btn ghost full">Reveal my assignment</button>
+      <div id="loginStatus" class="status"></div>
+    </div>
+  </div>
+
+  <div id="playerArea" class="hidden">
+    <div class="panel mission">
+      <div class="section-kicker" id="missionKicker">Confidential</div>
+      <h2 id="missionTitle">Your assignment</h2>
+      <div id="missionCards"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="section-kicker">Report</div>
+        <h2 id="confirmHeading">Confirm your fate</h2>
+        <label id="actorLabel">Who got you?<input id="actorName"></label>
+        <label id="itemUsedLabel">Object / condition<input id="itemUsed"></label>
+        <label>Location<input id="locationUsed"></label>
+        <label>Optional final words<textarea id="eventNote" rows="3"></textarea></label>
+        <button id="confirmEventBtn" class="btn danger full">Confirm</button>
+        <div id="eventStatus" class="status"></div>
+      </div>
+
+      <div class="panel">
+        <div class="section-kicker">Stuck?</div>
+        <h2>Mission compromised</h2>
+        <label class="check"><input type="checkbox" id="rerollItem"> New mission item</label>
+        <label class="check"><input type="checkbox" id="rerollLocation"> New location</label>
+        <label>Reason<textarea id="rerollReason" rows="3"></textarea></label>
+        <button id="rerollBtn" class="btn ghost full">Ask Game Master</button>
+        <div id="rerollStatus" class="status"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feed" class="view">
+  <div class="panel">
+    <div class="section-kicker">Anonymous activity</div>
+    <h2 id="feedTitle">Latest events</h2>
+    <div id="feedList" class="feed"></div>
+  </div>
+</section>
+
+<section id="admin" class="view">
+  <div class="panel">
+    <div class="section-kicker">Restricted</div>
+    <h2>Game Master</h2>
+    <div class="admin-login">
+      <input id="adminPin" type="password" inputmode="numeric" placeholder="Game Master PIN">
+      <button id="adminLoginBtn" class="btn ghost">Open dashboard</button>
+    </div>
+    <div id="adminStatus" class="status"></div>
+  </div>
+  <div id="adminDashboard" class="hidden"></div>
+</section>
+
+<footer>Built for staff fun. Keep missions safe, consensual and workplace-appropriate.</footer>
+</main>
+<script src="./config.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
